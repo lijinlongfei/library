@@ -1,0 +1,75 @@
+{% extends './layout.html' %}
+
+{% block content %}
+<a class="btn btn-success col-md-1" href="/lend/addStudent">添加学生</a>
+
+<form class="form-inline col-md-offset-4" role="form">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="请输入院系" name="searchCollege" value={{ searchCollege }} >
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="请输入班级" name="searchGrade" value={{ searchGrade }} >
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="请输入姓名" name="searchName" value={{ searchName }} >
+  </div>
+  <button type="submit" class="btn btn-default">搜索</button>
+</form>
+
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>姓名</th>
+        <th>学号</th>
+        <th>院系</th>
+        <th>班级</th>
+        <th>借阅数量</th>
+        <th>手机号</th>
+        <th>邮箱</th>
+        <th>状态</th>
+        <th>登录时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for obj in dataList %}
+      <tr>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.stunum }}</td>
+        <td>{{ obj.college.name }}</td>
+        <td>{{ obj.grade.name }}</td>
+        <td>{{ obj.lendnum }}</td>
+        <td>{{ obj.phone }}</td>
+        <td>{{ obj.email }}</td>
+        <td>{{ obj.get_status_display }}</td>
+        <td>{{ obj.login_datetime }}</td>
+        <td>
+            <a href="/book/bookUpdate/{{obj.id}}/">修改</a>
+            <a href="/book/bookDelete/{{obj.id}}/">删除</a>
+        </td>
+      </tr>
+      {% endfor %}
+     
+    </tbody>
+  </table>
+
+<div class="col-md-offset-5">
+  <ul class="pagination">
+    {% if page.has_previous %}
+      <li><a href="/book/bookList/?page={{page.previous_page_number}}&search={{ search }}">&laquo;</a></li>
+    {% else %}
+      <li><a href="#">&laquo;</a></li>
+    {% endif %}
+    
+    {% for i in page_range %}
+    <li class="{% if current_page == i %}active{% else %}disabled{% endif %}"><a href="/book/bookList/?page={{ i }}&search={{ search }}">{{ i }}</a></li>
+    {% endfor %}
+    {% if page.has_next %}
+      <li><a href="/book/bookList/?page={{page.next_page_number}}&search={{ search }}">&raquo;</a></li>
+    {% else %}
+      <li><a href="#">&raquo;</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endblock content %}

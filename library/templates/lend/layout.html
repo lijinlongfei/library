@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>学生成绩管理系统</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">图书系统</a>
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/book/bookList/">图书管理</a></li>
+                        <li><a href="/book/collegeList/">院系管理</a></li>
+                        <li><a href="/book/gradeList/">班级管理</a></li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+            {% block content %}
+
+
+            {% endblock content %} 
+        </div>
+    </body>
+</html>
